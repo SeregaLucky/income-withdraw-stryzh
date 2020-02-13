@@ -1,0 +1,7 @@
+.headerMain {
+  display: flex;
+  background: darksalmon;
+}
+.list {
+  display: flex;
+}
