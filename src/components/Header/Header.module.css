@@ -1,7 +1,23 @@
 .headerMain {
   display: flex;
-  background: darksalmon;
+  justify-content: space-between;
+  align-items: center;
+  background: #fa8072;
+  padding: 0 40px;
+}
+.logo a {
+  color: #fff;
 }
 .list {
   display: flex;
+  /* align-items: stretch; */
+}
+.item {
+  /* align-items: stretch; */
+}
+.link {
+  display: block;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 2px;
 }

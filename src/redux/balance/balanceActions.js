@@ -28,8 +28,8 @@ export const addIncomeMoneyAC = (type, amount) => {
 };
 
 export const editIncomeMoneyAC = (id, amount) => {
-  console.log(id);
-  console.log(amount);
+  // console.log(id);
+  // console.log(amount);
   return {
     type: balanceTypes.EDIT_INCOME_MONEY,
     payload: { id, amount }
@@ -44,6 +44,7 @@ export const removeIncomeMoneyAC = id => ({
 /* WITHDRAW */
 export const addWithdrawMoneyAC = (typeNeed, amount) => {
   const date = new Date();
+  // console.log(typeNeed);
 
   const obj = {
     id: shortid.generate(),

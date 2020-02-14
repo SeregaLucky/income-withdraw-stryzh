@@ -1,0 +1,17 @@
+.alanceSection {
+  padding: 20px 0;
+  min-height: calc(100vh - 95px);
+  background-color: ghostwhite;
+}
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+.list {
+  display: flex;
+  justify-content: center;
+}
+.item:not(:last-child) {
+  margin: 0 60px 0 0;
+}

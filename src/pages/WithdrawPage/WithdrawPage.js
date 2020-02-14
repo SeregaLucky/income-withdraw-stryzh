@@ -3,30 +3,18 @@ import { connect } from "react-redux";
 import styles from "./WithdrawPage.module.css";
 import balanceSelectors from "../../redux/balance/balanceSelectors";
 import { addWithdrawMoneyAC } from "../../redux/balance/balanceActions";
-import {
-  editWithdrawMoneyAC,
-  removeWithdrawMoneyAC
-} from "../../redux/balance/balanceActions";
 import Controls from "../../components/Controls/Controls";
 import TransactionHistory from "../../components/TransactionHistory/TransactionHistory";
 
-const WithdrawPage = ({ list, addWithdraw, changeItem, deleteItem }) => {
+const WithdrawPage = ({ list, addWithdraw }) => {
   return (
-    <section className={styles.incomeSection}>
+    <section className={styles.withdrawSection}>
       <div className={styles.container}>
-        <div>
-          <h2>Общая сумма</h2>
-        </div>
+        <h2 className={styles.title}>Withdraw</h2>
 
         <Controls type="withdraw" add={addWithdraw} />
 
-        {list.length > 0 && (
-          <TransactionHistory
-            list={list}
-            changeItem={changeItem}
-            deleteItem={deleteItem}
-          />
-        )}
+        {list.length > 0 && <TransactionHistory list={list} type="withdraw" />}
       </div>
     </section>
   );
@@ -38,9 +26,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addWithdraw: (typeNeed, amount) =>
-    dispatch(addWithdrawMoneyAC(typeNeed, amount)),
-  changeItem: (id, amount) => dispatch(editWithdrawMoneyAC(id, amount)),
-  deleteItem: id => dispatch(removeWithdrawMoneyAC(id))
+    dispatch(addWithdrawMoneyAC(typeNeed, amount))
 });
 
 // export default WithdrawPage;

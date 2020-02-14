@@ -3,30 +3,18 @@ import { connect } from "react-redux";
 import styles from "./IncomePage.module.css";
 import balanceSelectors from "../../redux/balance/balanceSelectors";
 import { addIncomeMoneyAC } from "../../redux/balance/balanceActions";
-import {
-  editIncomeMoneyAC,
-  removeIncomeMoneyAC
-} from "../../redux/balance/balanceActions";
 import Controls from "../../components/Controls/Controls";
 import TransactionHistory from "../../components/TransactionHistory/TransactionHistory";
 
-const IncomePage = ({ list, addIncome, changeItem, deleteItem }) => {
+const IncomePage = ({ list, addIncome }) => {
   return (
     <section className={styles.incomeSection}>
       <div className={styles.container}>
-        <div>
-          <h2>Общая сумма</h2>
-        </div>
+        <h2 className={styles.title}>Income</h2>
 
         <Controls type="income" add={addIncome} />
 
-        {list.length > 0 && (
-          <TransactionHistory
-            list={list}
-            changeItem={changeItem}
-            deleteItem={deleteItem}
-          />
-        )}
+        {list.length > 0 && <TransactionHistory list={list} type="income" />}
       </div>
     </section>
   );
@@ -37,9 +25,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addIncome: (typeNeed, amount) => dispatch(addIncomeMoneyAC(typeNeed, amount)),
-  changeItem: (id, amount) => dispatch(editIncomeMoneyAC(id, amount)),
-  deleteItem: id => dispatch(removeIncomeMoneyAC(id))
+  addIncome: (typeNeed, amount) => dispatch(addIncomeMoneyAC(typeNeed, amount))
 });
 
 // export default IncomePage;
