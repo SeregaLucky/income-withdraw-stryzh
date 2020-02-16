@@ -1,10 +1,33 @@
-// import { createStore } from "redux";
-import rootReducer from "./rootReducer";
+import { persistStore } from "redux-persist";
 import { configureStore } from "@reduxjs/toolkit";
+/* import - rootReducer */
+import rootReducer from "./rootReducer";
 
-// const store = createStore(rootReducer);
-const store = configureStore({
-  reducer: rootReducer
+const middlewares = [];
+
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: middlewares
 });
 
-export default store;
+export const persistor = persistStore(store);
+
+// export default { store, persistor };
+
+//
+//
+
+// import { persistStore } from "redux-persist";
+// import { configureStore } from "@reduxjs/toolkit";
+// /* import - rootReducer */
+// import rootReducer from "./rootReducer";
+
+// export const store = configureStore({
+//   reducer: rootReducer
+// });
+
+//
+//
+// export const persistor = null;
+
+// export default store;

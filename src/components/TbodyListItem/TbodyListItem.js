@@ -9,8 +9,6 @@ import {
   removeWithdrawMoneyAC
 } from "../../redux/balance/balanceActions";
 
-// type
-
 class TbodyListItem extends Component {
   state = { num: "" };
 
@@ -25,7 +23,6 @@ class TbodyListItem extends Component {
     const { changeItem } = this.props;
     let { num } = this.state;
     num = Number(num);
-    // console.log(num);
     changeItem(num);
   };
 
@@ -34,27 +31,24 @@ class TbodyListItem extends Component {
     console.log("Item");
 
     return (
-      <tr
-      // className={
-      //   item.type === "deposit" ? styles.itemIncome : styles.itemExpenses
-      // }
-      >
-        {/* <td>{item.type}</td> */}
+      <tr>
         <td>{item.amount}$</td>
+        <td>{item.direction}</td>
+        <td>{item.date}</td>
         <td>
-          {item.date}
           <button type="button" onClick={this.deleteItem}>
             Delete
           </button>
 
           <input type="number" onChange={this.handleChange} />
-          <button onClick={this.setChange}>change</button>
+          <button onClick={this.setChange}>Edit</button>
         </td>
       </tr>
     );
   }
 }
 
+// Иф использую чтобы компонента была универсальной и во избежание не нужных перерендоров
 const mapStateToProps = (state, { id, type }) => {
   if (type === "income") {
     return { item: balanceSelectors.getByIdIncomeMoney(state, id) };
@@ -64,6 +58,7 @@ const mapStateToProps = (state, { id, type }) => {
   }
 };
 
+// Иф использую чтобы компонента была универсальной и во избежание не нужных перерендоров
 const mapDispatchToProps = (dispatch, { id, type }) => {
   if (type === "income") {
     return {

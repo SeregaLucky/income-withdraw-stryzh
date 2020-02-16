@@ -7,9 +7,10 @@ const TransactionHistory = ({ list, type }) => {
     <table className={styles.historyTable}>
       <thead className={styles.theadHeader}>
         <tr>
-          {/* <th>Transaction</th> */}
           <th>Amount</th>
+          <th>Info</th>
           <th>Date</th>
+          <th>Make change or delete</th>
         </tr>
       </thead>
 

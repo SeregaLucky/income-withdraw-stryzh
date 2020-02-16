@@ -1,31 +1,63 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import styles from "./CategoryListItem.module.css";
+import {
+  editIncomeCategoryAC,
+  editWithdrawCategoryAC,
+  removeIncomeCategoryAC,
+  removeWithdrawCategoryAC
+} from "../../redux/categories/categoriesActions";
 
-// ["Спорт", "Девушек", "Развличения"]
+class CategoryListItem extends Component {
+  state = { editText: "" };
 
-// const Gender = {
-//   MALE: 'male',
-//   FEMALE: 'female',
-// };
+  handleChange = e => this.setState({ editText: e.target.value });
 
-const CategoryListItem = ({ name, checked = false, onChange }) => (
-  <input type="checkbox" name={name} checked={checked} onChange={onChange} />
-);
+  editItem = () => {
+    const { editI } = this.props;
+    const { editText } = this.state;
+    editI(editText);
+  };
 
-// const CategoryListItem = ({ item }) => {
-//   const handleChange = () => {};
+  render() {
+    const { option, deleteI } = this.props;
+    const { editText } = this.state;
 
-//   return (
-//     <label>
-//       <input
-//         type="radio"
-//         checked={gender === Gender.FEMALE}
-//         name="gender"
-//         value={Gender.FEMALE}
-//         onChange={handleChange}
-//       />
-//     </label>
-//   );
-// };
+    return (
+      <li className={styles.item}>
+        <span>{option}</span>
+        <button type="button" onClick={deleteI}>
+          Delete
+        </button>
 
-export default CategoryListItem;
+        <input
+          type="text"
+          value={editText}
+          onChange={this.handleChange}
+          name="editText"
+          placeholder="Edit..."
+        />
+        <button type="button" onClick={this.editItem}>
+          Edit
+        </button>
+      </li>
+    );
+  }
+}
+
+const mapDispatchToProps = (dispatch, { type, option }) => {
+  if (type === "income") {
+    return {
+      deleteI: () => dispatch(removeIncomeCategoryAC(option)),
+      editI: optionNew => dispatch(editIncomeCategoryAC(option, optionNew))
+    };
+  }
+  if (type === "withdraw") {
+    return {
+      deleteI: () => dispatch(removeWithdrawCategoryAC(option)),
+      editI: optionNew => dispatch(editWithdrawCategoryAC(option, optionNew))
+    };
+  }
+};
+
+export default connect(null, mapDispatchToProps)(CategoryListItem);

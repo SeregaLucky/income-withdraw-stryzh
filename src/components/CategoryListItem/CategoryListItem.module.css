@@ -1,12 +1,3 @@
-.footerMain {
-  padding: 20px 0;
-  background-color: darkslategrey;
-}
-.container {
-  margin: 0 auto;
-  padding: 0 20px;
-}
-.text {
-  color: #fff;
-  text-transform: uppercase;
+.item:not(:last-child) {
+  margin: 0 0 6px 0;
 }

@@ -1,24 +1,29 @@
 import React from "react";
-import styles from "./Controls.module.css";
-import { Formik, Form, Field } from "formik";
+import { connect } from "react-redux";
 import * as yup from "yup";
+import { Formik, Form, Field } from "formik";
+import styles from "./Controls.module.css";
+import categoriesSelectors from "../../redux/categories/categoriesSelectors";
 
 const validationSchema = yup.object({
   num: yup
     .string()
     .max(20, "Максимальное 20 символа")
-    .required("Поле обезательное к заполнению")
+    .required("Поле обезательное к заполнению"),
+  money: yup.array().required("Поле обезательное к заполнению")
 });
 
-const Controls = ({ type, add }) => {
+const Controls = ({ type, add, options }) => {
   return (
-    <section className={styles.controls}>
+    <div className={styles.controls}>
+      {console.log("Controls")}
       <Formik
-        initialValues={{ num: "" }}
+        initialValues={{ num: "", money: [] }}
         onSubmit={(data, { resetForm }) => {
-          const { num } = data;
+          const { num, money } = data;
+          // console.log(money);
 
-          add(type, num);
+          add(type, num, money);
           resetForm();
         }}
         validationSchema={validationSchema}
@@ -39,23 +44,37 @@ const Controls = ({ type, add }) => {
               )}
             </label>
 
-            <button
-              type="submit"
-              className={styles.button}
-              // disabled={loading}
-            >
+            <label htmlFor="money">Choose:</label>
+            <Field component="select" id="money" name="money" multiple={true}>
+              {options.map(option => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </Field>
+
+            <button type="submit" className={styles.button}>
               Add
             </button>
           </Form>
         )}
       </Formik>
-    </section>
+    </div>
   );
 };
 
-export default Controls;
+const mapStateToProps = (state, { type }) => {
+  if (type === "income") {
+    return {
+      options: categoriesSelectors.getIncomeCategory(state)
+    };
+  }
+  if (type === "withdraw") {
+    return {
+      options: categoriesSelectors.getWithdrawCategory(state)
+    };
+  }
+};
 
-//
-//
-//
-//
+// export default Controls;
+export default connect(mapStateToProps)(Controls);

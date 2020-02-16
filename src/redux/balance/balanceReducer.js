@@ -1,45 +1,47 @@
 import { combineReducers } from "redux";
-import balanceTypes from "./balanceTypes";
+import { createReducer } from "@reduxjs/toolkit";
+// import balanceTypes from "./balanceTypes";
+import balanceT from "./balanceTypes";
 
-const incomeMoneyReducer = (state = [], { type, payload }) => {
-  switch (type) {
-    case balanceTypes.ADD_INCOME_MONEY:
-      return [...state, payload.obj];
+/* INCOME */
+const incomeMoneyReducer = createReducer([], {
+  [balanceT.ADD_INCOME_MONEY]: (state, { payload }) => [...state, payload.obj],
 
-    case balanceTypes.EDIT_INCOME_MONEY:
-      return state.map(item =>
-        item.id === payload.id ? { ...item, amount: payload.amount } : item
-      );
+  [balanceT.EDIT_INCOME_MONEY]: (state, { payload }) =>
+    state.map(item =>
+      item.id === payload.id ? { ...item, amount: payload.amount } : item
+    ),
 
-    case balanceTypes.REMOVE_INCOME_MONEY:
-      return state.filter(item => item.id !== payload.id);
+  [balanceT.REMOVE_INCOME_MONEY]: (state, { payload }) =>
+    state.filter(item => item.id !== payload.id)
+});
 
-    default:
-      return state;
-  }
-};
+/* WITHDRAW */
+const withdrawMoneyReducer = createReducer([], {
+  [balanceT.ADD_WITHDRAW_MONEY]: (state, { payload }) => [
+    ...state,
+    payload.obj
+  ],
 
-const withdrawMoneyReducer = (state = [], { type, payload }) => {
-  switch (type) {
-    case balanceTypes.ADD_WITHDRAW_MONEY:
-      return [...state, payload.obj];
+  [balanceT.EDIT_WITHDRAW_MONEY]: (state, { payload }) =>
+    state.map(item =>
+      item.id === payload.id ? { ...item, amount: payload.amount } : item
+    ),
 
-    case balanceTypes.EDIT_WITHDRAW_MONEY:
-      return state.map(item =>
-        item.id === payload.id ? { ...item, amount: payload.amount } : item
-      );
+  [balanceT.REMOVE_WITHDRAW_MONEY]: (state, { payload }) =>
+    state.filter(item => item.id !== payload.id)
+});
 
-    case balanceTypes.REMOVE_WITHDRAW_MONEY:
-      return state.filter(item => item.id !== payload.id);
-
-    default:
-      return state;
-  }
-};
+/* ALL */
+const filterByDateReducer = createReducer(null, {
+  [balanceT.ADD_FILTER_BY_DATE]: (state, { payload }) => payload,
+  [balanceT.DELETE_FILTER_BY_DATE]: () => null
+});
 
 export default combineReducers({
   incomeMoney: incomeMoneyReducer,
-  withdrawMoney: withdrawMoneyReducer
+  withdrawMoney: withdrawMoneyReducer,
+  filterByDate: filterByDateReducer
 });
 
 //
@@ -47,23 +49,17 @@ export default combineReducers({
 //
 //
 
-// import { combineReducers } from "redux";
-// import balanceTypes from "./balanceTypes";
-
-// const moneyReducer = (state = [], { type, payload }) => {
+// const incomeMoneyReducer = (state = [], { type, payload }) => {
 //   switch (type) {
 //     case balanceTypes.ADD_INCOME_MONEY:
-//     case balanceTypes.ADD_WITHDRAW_MONEY:
 //       return [...state, payload.obj];
 
 //     case balanceTypes.EDIT_INCOME_MONEY:
-//     case balanceTypes.EDIT_WITHDRAW_MONEY:
 //       return state.map(item =>
 //         item.id === payload.id ? { ...item, amount: payload.amount } : item
 //       );
 
 //     case balanceTypes.REMOVE_INCOME_MONEY:
-//     case balanceTypes.REMOVE_WITHDRAW_MONEY:
 //       return state.filter(item => item.id !== payload.id);
 
 //     default:
@@ -71,6 +67,23 @@ export default combineReducers({
 //   }
 // };
 
-// export default combineReducers({
-//   money: moneyReducer
-// });
+//
+//
+
+// const withdrawMoneyReducer = (state = [], { type, payload }) => {
+//   switch (type) {
+//     case balanceTypes.ADD_WITHDRAW_MONEY:
+//       return [...state, payload.obj];
+
+//     case balanceTypes.EDIT_WITHDRAW_MONEY:
+//       return state.map(item =>
+//         item.id === payload.id ? { ...item, amount: payload.amount } : item
+//       );
+
+//     case balanceTypes.REMOVE_WITHDRAW_MONEY:
+//       return state.filter(item => item.id !== payload.id);
+
+//     default:
+//       return state;
+//   }
+// };

@@ -5,12 +5,17 @@ import balanceSelectors from "../../redux/balance/balanceSelectors";
 import { addIncomeMoneyAC } from "../../redux/balance/balanceActions";
 import Controls from "../../components/Controls/Controls";
 import TransactionHistory from "../../components/TransactionHistory/TransactionHistory";
+import Categories from "../../components/Categories/Categories";
 
-const IncomePage = ({ list, addIncome }) => {
+const IncomePage = ({ list, allIncome, addIncome }) => {
+  // console.log(allIncome);
+
   return (
     <section className={styles.incomeSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Income</h2>
+
+        <Categories type="income" />
 
         <Controls type="income" add={addIncome} />
 
@@ -22,10 +27,12 @@ const IncomePage = ({ list, addIncome }) => {
 
 const mapStateToProps = state => ({
   list: balanceSelectors.getIncomeMoney(state)
+  // allIncome: balanceSelectors.getAllIncome(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  addIncome: (typeNeed, amount) => dispatch(addIncomeMoneyAC(typeNeed, amount))
+  addIncome: (typeNeed, amount, direction) =>
+    dispatch(addIncomeMoneyAC(typeNeed, amount, direction))
 });
 
 // export default IncomePage;

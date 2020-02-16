@@ -7,17 +7,32 @@
 }
 .logo a {
   color: #fff;
+  font-family: "MontserratRegular", sans-serif;
+  letter-spacing: 0.1em;
 }
 .list {
   display: flex;
-  /* align-items: stretch; */
 }
-.item {
-  /* align-items: stretch; */
+.item:not(:last-child) {
+  margin: 0 20px 0 0;
 }
 .link {
   display: block;
   text-transform: uppercase;
   color: #fff;
-  padding: 2px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: "MontserratRegular", sans-serif;
+  letter-spacing: 0.1em;
+}
+.link:focus,
+.link:hover {
+  transition: 0.2s;
+  background: #e96b5d;
+}
+
+.link.activeLink {
+  transition: 0.2s;
+  background: #e96b5d;
+  box-shadow: 0px 0px 4px 0 #b84437 inset;
 }
