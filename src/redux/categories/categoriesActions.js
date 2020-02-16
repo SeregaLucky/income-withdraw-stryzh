@@ -27,10 +27,7 @@ export const editWithdrawCategoryAC = (withdrawDel, newW) => ({
   payload: { withdrawDel, newW }
 });
 
-export const removeWithdrawCategoryAC = withdraw => {
-  // console.log(withdraw);
-  return {
-    type: categoriesTypes.REMOVE_WITHDRAW_CATEGORY,
-    payload: { withdraw }
-  };
-};
+export const removeWithdrawCategoryAC = withdraw => ({
+  type: categoriesTypes.REMOVE_WITHDRAW_CATEGORY,
+  payload: { withdraw }
+});

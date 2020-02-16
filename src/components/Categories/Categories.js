@@ -9,19 +9,19 @@ import {
 import CategoryListItem from "../CategoryListItem/CategoryListItem";
 
 class Categories extends Component {
-  state = { newC: "" };
+  state = { newCategory: "" };
 
-  handleChange = e => this.setState({ newC: e.target.value });
+  handleChange = e => this.setState({ newCategory: e.target.value });
 
   addNewItem = () => {
     const { addItem } = this.props;
-    const { newC } = this.state;
-    addItem(newC);
+    const { newCategory } = this.state;
+    addItem(newCategory);
   };
 
   render() {
     const { options, type } = this.props;
-    const { newC } = this.state;
+    const { newCategory } = this.state;
 
     return (
       <>
@@ -29,8 +29,8 @@ class Categories extends Component {
 
         <input
           type="text"
-          name="newC"
-          value={newC}
+          name="newCategory"
+          value={newCategory}
           onChange={this.handleChange}
           placeholder="New categories..."
         />
@@ -38,11 +38,13 @@ class Categories extends Component {
           Add
         </button>
 
-        <ul className={styles.list}>
-          {options.map(option => (
-            <CategoryListItem key={option} option={option} type={type} />
-          ))}
-        </ul>
+        {options && (
+          <ul className={styles.list}>
+            {options.map(option => (
+              <CategoryListItem key={option} option={option} type={type} />
+            ))}
+          </ul>
+        )}
       </>
     );
   }

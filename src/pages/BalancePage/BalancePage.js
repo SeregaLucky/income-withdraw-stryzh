@@ -6,17 +6,9 @@ import ResultProgressBar from "../../components/ResultProgressBar/ResultProgress
 import CategoryBar from "../../components/CategoryBar/CategoryBar";
 import CalendarMy from "../../components/Calendar/Calendar";
 
-const BalancePage = ({
-  income,
-  withdraw,
-  allIncome,
-  allWithdraw,
-  // getAllFilter,
-  getAllFilter222
-}) => {
+const BalancePage = ({ income, withdraw, allIncome, allWithdraw }) => {
   const balance = income - withdraw;
   const all = income + withdraw;
-  console.log(getAllFilter222);
 
   return (
     <section className={styles.alanceSection}>
@@ -47,13 +39,11 @@ const BalancePage = ({
 };
 
 const mapStateToProps = state => ({
-  income: balanceSelectors.getIncome(state),
-  withdraw: balanceSelectors.getWithdraw(state),
-  allIncome: balanceSelectors.getAllIncomeNew(state),
-  allWithdraw: balanceSelectors.getAllWithdrawNew(state),
+  income: balanceSelectors.getAmountIncome(state),
+  allIncome: balanceSelectors.getFilterIncome(state),
 
-  // getAllFilter: balanceSelectors.getAllFilterByDate(state),
-  getAllFilter222: balanceSelectors.getAllFilterByDate222(state)
+  withdraw: balanceSelectors.getAmountWithdraw(state),
+  allWithdraw: balanceSelectors.getFilterWithdraw(state)
 });
 
 export default connect(mapStateToProps)(BalancePage);

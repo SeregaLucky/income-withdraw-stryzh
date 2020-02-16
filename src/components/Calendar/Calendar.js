@@ -14,7 +14,6 @@ class CalendarMy extends Component {
   onClickAddFilter = () => {
     const { addFilter } = this.props;
     const { date } = this.state;
-    // console.log(new Date() < this.state.date)
     addFilter(date[0], date[1]);
   };
 
@@ -24,8 +23,6 @@ class CalendarMy extends Component {
   };
 
   render() {
-    console.log(new Date());
-    console.log(this.state.date);
     return (
       <div>
         <Calendar
@@ -51,5 +48,4 @@ const mapDispatchToProps = dispatch => ({
   delelteFilter: () => dispatch(deleteFilterByDateAC())
 });
 
-// export default CalendarMy;
 export default connect(null, mapDispatchToProps)(CalendarMy);

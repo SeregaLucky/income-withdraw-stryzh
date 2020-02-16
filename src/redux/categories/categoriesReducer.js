@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
-// import categoriesTypes from "./categoriesTypes";
 import categoriesT from "./categoriesTypes";
 
 const OPTIONS_IN = [
@@ -55,47 +54,3 @@ export default combineReducers({
   incomeCategory: incomeCategoryReducer,
   withdrawCategory: withdrawCategoryReducer
 });
-
-//
-//
-//
-//
-
-// const incomeCategoryReducer = (state = OPTIONS_IN, { type, payload }) => {
-//   switch (type) {
-//     case categoriesTypes.ADD_INCOME_CATEGORY:
-//       return [...state, payload.income];
-
-//     case categoriesTypes.EDIT_INCOME_CATEGORY:
-//       return state.map(income =>
-//         income === payload.incomeDel ? payload.newI : income
-//       );
-
-//     case categoriesTypes.REMOVE_INCOME_CATEGORY:
-//       return state.filter(income => income !== payload.income);
-
-//     default:
-//       return state;
-//   }
-// };
-
-//
-//
-
-// const withdrawCategoryReducer = (state = OPTIONS_W, { type, payload }) => {
-//   switch (type) {
-//     case categoriesTypes.ADD_WITHDRAW_CATEGORY:
-//       return [...state, payload.withdraw];
-
-//     case categoriesTypes.EDIT_WITHDRAW_CATEGORY:
-//       return state.map(withdraw =>
-//         withdraw === payload.withdrawDel ? payload.newW : withdraw
-//       );
-
-//     case categoriesTypes.REMOVE_WITHDRAW_CATEGORY:
-//       return state.filter(withdraw => withdraw !== payload.withdraw);
-
-//     default:
-//       return state;
-//   }
-// };

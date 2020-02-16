@@ -21,17 +21,6 @@ const options = {
   legend: {
     display: true
   }
-  // rotation: 0.2 * Math.PI - (25 / 180) * Math.PI,
-  // maintainAspectRatio: true,
-  // tooltips: {
-  //   mode: "point",
-  //   callbacks: {
-  //     label: (tooltipItem, data) => {
-  //       let label = data.labels[tooltipItem.index] || "";
-  //       return `${label}`;
-  //     }
-  //   }
-  // }
 };
 
 const ResultProgressBar = ({ income, all }) => {

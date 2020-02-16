@@ -7,19 +7,15 @@ import categoriesReducer from "./categories/categoriesReducer";
 
 const balancePersistConfig = {
   key: "balance",
-  storage
-  // whitelist: ["incomeMoney", "withdrawMoney"]
+  storage,
+  blacklist: ["filterByDate"]
 };
+
 const categoriesPersistConfig = {
   key: "categories",
   storage
-  // whitelist: ["incomeCategory", "withdrawCategory"]
 };
 
-// export default combineReducers({
-//   balance: balanceReducer,
-//   categories: categoriesReducer
-// });
 export default combineReducers({
   balance: persistReducer(balancePersistConfig, balanceReducer),
   categories: persistReducer(categoriesPersistConfig, categoriesReducer)

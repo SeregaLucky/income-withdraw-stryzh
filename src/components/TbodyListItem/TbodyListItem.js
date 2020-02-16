@@ -9,6 +9,12 @@ import {
   removeWithdrawMoneyAC
 } from "../../redux/balance/balanceActions";
 
+const OPTION = {
+  year: "numeric",
+  day: "numeric",
+  month: "2-digit"
+};
+
 class TbodyListItem extends Component {
   state = { num: "" };
 
@@ -34,7 +40,7 @@ class TbodyListItem extends Component {
       <tr>
         <td>{item.amount}$</td>
         <td>{item.direction}</td>
-        <td>{item.date}</td>
+        <td>{item.date.toLocaleString("en-US", OPTION)}</td>
         <td>
           <button type="button" onClick={this.deleteItem}>
             Delete
@@ -51,10 +57,10 @@ class TbodyListItem extends Component {
 // Иф использую чтобы компонента была универсальной и во избежание не нужных перерендоров
 const mapStateToProps = (state, { id, type }) => {
   if (type === "income") {
-    return { item: balanceSelectors.getByIdIncomeMoney(state, id) };
+    return { item: balanceSelectors.getByIdIncome(state, id) };
   }
   if (type === "withdraw") {
-    return { item: balanceSelectors.getByIdWithdrawMoney(state, id) };
+    return { item: balanceSelectors.getByIdWithdraw(state, id) };
   }
 };
 

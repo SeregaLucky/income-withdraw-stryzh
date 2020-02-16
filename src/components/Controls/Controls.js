@@ -21,7 +21,6 @@ const Controls = ({ type, add, options }) => {
         initialValues={{ num: "", money: [] }}
         onSubmit={(data, { resetForm }) => {
           const { num, money } = data;
-          // console.log(money);
 
           add(type, num, money);
           resetForm();
@@ -76,5 +75,4 @@ const mapStateToProps = (state, { type }) => {
   }
 };
 
-// export default Controls;
 export default connect(mapStateToProps)(Controls);

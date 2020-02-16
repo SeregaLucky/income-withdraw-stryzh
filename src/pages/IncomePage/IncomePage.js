@@ -7,9 +7,7 @@ import Controls from "../../components/Controls/Controls";
 import TransactionHistory from "../../components/TransactionHistory/TransactionHistory";
 import Categories from "../../components/Categories/Categories";
 
-const IncomePage = ({ list, allIncome, addIncome }) => {
-  // console.log(allIncome);
-
+const IncomePage = ({ list, addIncome }) => {
   return (
     <section className={styles.incomeSection}>
       <div className={styles.container}>
@@ -26,8 +24,7 @@ const IncomePage = ({ list, allIncome, addIncome }) => {
 };
 
 const mapStateToProps = state => ({
-  list: balanceSelectors.getIncomeMoney(state)
-  // allIncome: balanceSelectors.getAllIncome(state)
+  list: balanceSelectors.getIncome(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -35,5 +32,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addIncomeMoneyAC(typeNeed, amount, direction))
 });
 
-// export default IncomePage;
 export default connect(mapStateToProps, mapDispatchToProps)(IncomePage);

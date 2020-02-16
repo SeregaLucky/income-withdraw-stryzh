@@ -24,7 +24,7 @@ const WithdrawPage = ({ list, addWithdraw }) => {
 };
 
 const mapStateToProps = state => ({
-  list: balanceSelectors.getWithdrawMoney(state)
+  list: balanceSelectors.getWithdraw(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -32,5 +32,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addWithdrawMoneyAC(typeNeed, amount, direction))
 });
 
-// export default WithdrawPage;
 export default connect(mapStateToProps, mapDispatchToProps)(WithdrawPage);
