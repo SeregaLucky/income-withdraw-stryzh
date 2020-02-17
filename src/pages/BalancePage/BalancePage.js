@@ -16,15 +16,17 @@ const BalancePage = ({ income, withdraw, allIncome, allWithdraw }) => {
       <div className={styles.container}>
         <h2 className={styles.title}>Balance page</h2>
 
-        <CalendarMy />
-
-        <ul className={styles.list}>
-          <li className={styles.item}>Balance: {balance}$</li>
-          <li className={styles.item}>Income: {income}$</li>
-          <li className={styles.item}>Withdraw: {withdraw}$</li>
-        </ul>
+        {all && (
+          <ul className={styles.list}>
+            <li className={styles.item}>Balance: {balance}$</li>
+            <li className={styles.item}>Income: {income}$</li>
+            <li className={styles.item}>Withdraw: {withdraw}$</li>
+          </ul>
+        )}
 
         {all > 0 && <ResultProgressBar income={income} all={all} />}
+
+        <CalendarMy />
 
         <ul className={styles.listBar}>
           <li className={styles.itemBar}>

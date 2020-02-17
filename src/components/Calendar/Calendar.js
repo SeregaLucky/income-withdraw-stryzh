@@ -32,7 +32,7 @@ class CalendarMy extends Component {
   render() {
     return (
       <div className={styles.calendarCont}>
-        <h3>Filter by date</h3>
+        <h3>Filter by date income and withdraw</h3>
         <Calendar
           onChange={this.onChange}
           value={this.state.date}
