@@ -1,22 +1,22 @@
-import { combineReducers } from "redux";
-import { persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 /* import - reducers */
-import balanceReducer from "./balance/balanceReducer";
-import categoriesReducer from "./categories/categoriesReducer";
+import balanceReducer from './balance/balanceReducer';
+import categoriesReducer from './categories/categoriesReducer';
 
 const balancePersistConfig = {
-  key: "balance",
+  key: 'balance',
   storage,
-  blacklist: ["filterByDate"]
+  blacklist: ['filterByDate'],
 };
 
 const categoriesPersistConfig = {
-  key: "categories",
-  storage
+  key: 'categories',
+  storage,
 };
 
 export default combineReducers({
   balance: persistReducer(balancePersistConfig, balanceReducer),
-  categories: persistReducer(categoriesPersistConfig, categoriesReducer)
+  categories: persistReducer(categoriesPersistConfig, categoriesReducer),
 });

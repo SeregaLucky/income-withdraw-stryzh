@@ -1,4 +1,4 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
 /*
  * ALL
@@ -24,7 +24,7 @@ const getIncomeFilterByDate = createSelector(
     if (!filterByDate) return allIncome;
 
     const filterIncome = allIncome.filter(item => {
-      const itemDate = new Date(item.date2);
+      const itemDate = new Date(item.date);
       if (filterByDate.from <= itemDate && filterByDate.to >= itemDate) {
         return item;
       }
@@ -32,7 +32,7 @@ const getIncomeFilterByDate = createSelector(
     });
 
     return filterIncome;
-  }
+  },
 );
 
 const getFilterIncome = createSelector([getIncomeFilterByDate], incomeMoney => {
@@ -52,7 +52,7 @@ const getFilterIncome = createSelector([getIncomeFilterByDate], incomeMoney => {
   const allIncome = incomeMoney.reduce((acc, next) => {
     return {
       ...acc,
-      [next.direction]: acc[next.direction] + next.amount
+      [next.direction]: acc[next.direction] + next.amount,
     };
   }, defaultObjlDirections);
 
@@ -81,7 +81,7 @@ const getWithdrawFilterByDate = createSelector(
     if (!filterByDate) return allWithdraw;
 
     const filterWithdraw = allWithdraw.filter(item => {
-      const itemDate = new Date(item.date2);
+      const itemDate = new Date(item.date);
       if (filterByDate.from <= itemDate && filterByDate.to >= itemDate) {
         return item;
       }
@@ -89,7 +89,7 @@ const getWithdrawFilterByDate = createSelector(
     });
 
     return filterWithdraw;
-  }
+  },
 );
 
 const getFilterWithdraw = createSelector(
@@ -111,7 +111,7 @@ const getFilterWithdraw = createSelector(
     const allIncome = withdrawMoney.reduce((acc, next) => {
       return {
         ...acc,
-        [next.direction]: acc[next.direction] + next.amount
+        [next.direction]: acc[next.direction] + next.amount,
       };
     }, defaultObjlDirections);
 
@@ -119,7 +119,7 @@ const getFilterWithdraw = createSelector(
     const allValues = Object.values(allIncome);
 
     return { allKeys, allValues };
-  }
+  },
 );
 
 export default {
@@ -131,5 +131,5 @@ export default {
   getWithdraw,
   getAmountWithdraw,
   getByIdWithdraw,
-  getFilterWithdraw
+  getFilterWithdraw,
 };

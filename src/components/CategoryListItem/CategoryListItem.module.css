@@ -1,3 +1,16 @@
+.item {
+  padding: 10px;
+  width: 80%;
+  background: #fdd700;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  margin: 0 auto;
+}
 .item:not(:last-child) {
-  margin: 0 0 6px 0;
+  margin-bottom: 6px;
+}
+.item input {
+  padding: 10px 20px;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }

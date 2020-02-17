@@ -1,14 +1,13 @@
-import React from "react";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-// import { connect } from "react-redux";
+import React from 'react';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 /* import - ROUTES */
-import routes from "../routes";
+import routes from '../routes';
 /* import - COMPONENTS */
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import BalancePage from "../pages/BalancePage";
-import IncomePage from "../pages/IncomePage";
-import WithdrawPage from "../pages/WithdrawPage";
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+import BalancePage from '../pages/BalancePage';
+import IncomePage from '../pages/IncomePage';
+import WithdrawPage from '../pages/WithdrawPage';
 
 const App = () => {
   return (

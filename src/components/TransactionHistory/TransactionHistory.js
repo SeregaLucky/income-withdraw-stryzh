@@ -1,6 +1,7 @@
-import React from "react";
-import styles from "./TransactionHistory.module.css";
-import TbodyList from "../TbodyList/TbodyList";
+import React from 'react';
+import T from 'prop-types';
+import styles from './TransactionHistory.module.css';
+import TbodyList from '../TbodyList/TbodyList';
 
 const TransactionHistory = ({ list, type }) => (
   <table className={styles.historyTable}>
@@ -16,5 +17,10 @@ const TransactionHistory = ({ list, type }) => (
     <TbodyList list={list} type={type} />
   </table>
 );
+
+TransactionHistory.propTypes = {
+  list: T.arrayOf(T.shape()).isRequired,
+  type: T.string.isRequired,
+};
 
 export default TransactionHistory;

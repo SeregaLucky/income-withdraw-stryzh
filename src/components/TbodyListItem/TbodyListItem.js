@@ -1,22 +1,35 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import T from 'prop-types';
 // import styles from "./TbodyListItem.module.css";
-import balanceSelectors from "../../redux/balance/balanceSelectors";
+import balanceSelectors from '../../redux/balance/balanceSelectors';
 import {
   editIncomeMoneyAC,
   removeIncomeMoneyAC,
   editWithdrawMoneyAC,
-  removeWithdrawMoneyAC
-} from "../../redux/balance/balanceActions";
+  removeWithdrawMoneyAC,
+} from '../../redux/balance/balanceActions';
 
 const OPTION = {
-  year: "numeric",
-  day: "numeric",
-  month: "2-digit"
+  year: 'numeric',
+  day: 'numeric',
+  month: '2-digit',
 };
 
 class TbodyListItem extends Component {
-  state = { num: "" };
+  static propTypes = {
+    item: T.shape({
+      id: T.string.isRequired,
+      amount: T.number.isRequired,
+      direction: T.string.isRequired,
+      type: T.string.isRequired,
+    }).isRequired,
+
+    changeItem: T.func.isRequired,
+    deleteItem: T.func.isRequired,
+  };
+
+  state = { num: '' };
 
   deleteItem = () => {
     const { item, deleteItem } = this.props;
@@ -34,13 +47,13 @@ class TbodyListItem extends Component {
 
   render() {
     const { item } = this.props;
-    console.log("Item");
+    console.log('Item');
 
     return (
       <tr>
         <td>{item.amount}$</td>
         <td>{item.direction}</td>
-        <td>{item.date.toLocaleString("en-US", OPTION)}</td>
+        <td>{item.date.toLocaleString('en-US', OPTION)}</td>
         <td>
           <button type="button" onClick={this.deleteItem}>
             Delete
@@ -54,28 +67,28 @@ class TbodyListItem extends Component {
   }
 }
 
-// Иф использую чтобы компонента была универсальной и во избежание не нужных перерендоров
+// if использую чтобы компонента была универсальной и во избежание не нужных перерендоров
 const mapStateToProps = (state, { id, type }) => {
-  if (type === "income") {
+  if (type === 'income') {
     return { item: balanceSelectors.getByIdIncome(state, id) };
   }
-  if (type === "withdraw") {
+  if (type === 'withdraw') {
     return { item: balanceSelectors.getByIdWithdraw(state, id) };
   }
 };
 
-// Иф использую чтобы компонента была универсальной и во избежание не нужных перерендоров
+// if использую чтобы компонента была универсальной и во избежание не нужных перерендоров
 const mapDispatchToProps = (dispatch, { id, type }) => {
-  if (type === "income") {
+  if (type === 'income') {
     return {
       changeItem: amount => dispatch(editIncomeMoneyAC(id, amount)),
-      deleteItem: () => dispatch(removeIncomeMoneyAC(id))
+      deleteItem: () => dispatch(removeIncomeMoneyAC(id)),
     };
   }
-  if (type === "withdraw") {
+  if (type === 'withdraw') {
     return {
       changeItem: amount => dispatch(editWithdrawMoneyAC(id, amount)),
-      deleteItem: () => dispatch(removeWithdrawMoneyAC(id))
+      deleteItem: () => dispatch(removeWithdrawMoneyAC(id)),
     };
   }
 };

@@ -1,6 +1,7 @@
-import React from "react";
+import React from 'react';
+import T from 'prop-types';
 // import styles from "./TbodyList.module.css";
-import TbodyListItem from "../TbodyListItem/TbodyListItem";
+import TbodyListItem from '../TbodyListItem/TbodyListItem';
 
 const TbodyList = ({ list, type }) => {
   return (
@@ -10,6 +11,18 @@ const TbodyList = ({ list, type }) => {
       ))}
     </tbody>
   );
+};
+
+TbodyList.propTypes = {
+  list: T.arrayOf(
+    T.shape({
+      id: T.string.isRequired,
+      amount: T.number.isRequired,
+      direction: T.string.isRequired,
+      type: T.string.isRequired,
+    }),
+  ).isRequired,
+  type: T.string.isRequired,
 };
 
 export default TbodyList;

@@ -1,7 +1,7 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import styles from "./Header.module.css";
-import routes from "../../routes";
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import styles from './Header.module.css';
+import routes from '../../routes';
 
 const Header = () => (
   <header className={styles.headerMain}>

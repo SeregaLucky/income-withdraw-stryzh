@@ -1,12 +1,19 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Calendar from "react-calendar";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Calendar from 'react-calendar';
+import T from 'prop-types';
+import styles from './Calendar.module.css';
 import {
   addFilterByDateAC,
-  deleteFilterByDateAC
-} from "../../redux/balance/balanceActions";
+  deleteFilterByDateAC,
+} from '../../redux/balance/balanceActions';
 
 class CalendarMy extends Component {
+  static propTypes = {
+    addFilter: T.func.isRequired,
+    delelteFilter: T.func.isRequired,
+  };
+
   state = { date: new Date() };
 
   onChange = date => this.setState({ date });
@@ -24,20 +31,31 @@ class CalendarMy extends Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.calendarCont}>
+        <h3>Filter by date</h3>
         <Calendar
           onChange={this.onChange}
           value={this.state.date}
           selectRange
         />
 
-        <button type="button" onClick={this.onClickAddFilter}>
-          Add
-        </button>
+        <div className={styles.buttonsCont}>
+          <button
+            type="button"
+            onClick={this.onClickAddFilter}
+            className={styles.button}
+          >
+            Apply filtering
+          </button>
 
-        <button type="button" onClick={this.onClickDeleteFilter}>
-          Delete
-        </button>
+          <button
+            type="button"
+            onClick={this.onClickDeleteFilter}
+            className={styles.button}
+          >
+            Remove filtering
+          </button>
+        </div>
       </div>
     );
   }
@@ -45,7 +63,7 @@ class CalendarMy extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addFilter: (to, from) => dispatch(addFilterByDateAC(to, from)),
-  delelteFilter: () => dispatch(deleteFilterByDateAC())
+  delelteFilter: () => dispatch(deleteFilterByDateAC()),
 });
 
 export default connect(null, mapDispatchToProps)(CalendarMy);

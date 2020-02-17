@@ -3,11 +3,14 @@
   min-height: calc(100vh - 95px);
   background-color: ghostwhite;
 }
+.container {
+  padding: 0 20px;
+}
 .title {
   text-align: center;
   text-transform: uppercase;
   margin: 0 0 20px 0;
-  font-family: "MontserratRegular", sans-serif;
+  font-family: 'MontserratRegular', sans-serif;
   letter-spacing: 0.1em;
 }
 .list {
@@ -15,7 +18,7 @@
   justify-content: center;
 }
 .item {
-  font-family: "MontserratRegular", sans-serif;
+  font-family: 'MontserratRegular', sans-serif;
   letter-spacing: 0.1em;
 }
 .item:not(:last-child) {

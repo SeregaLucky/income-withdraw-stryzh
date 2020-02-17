@@ -1,15 +1,21 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import styles from "./CategoryListItem.module.css";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import T from 'prop-types';
+import styles from './CategoryListItem.module.css';
 import {
   editIncomeCategoryAC,
   editWithdrawCategoryAC,
   removeIncomeCategoryAC,
-  removeWithdrawCategoryAC
-} from "../../redux/categories/categoriesActions";
+  removeWithdrawCategoryAC,
+} from '../../redux/categories/categoriesActions';
 
 class CategoryListItem extends Component {
-  state = { editText: "" };
+  static propTypes = {
+    deleteI: T.func.isRequired,
+    editI: T.func.isRequired,
+  };
+
+  state = { editText: '' };
 
   handleChange = e => this.setState({ editText: e.target.value });
 
@@ -25,18 +31,22 @@ class CategoryListItem extends Component {
 
     return (
       <li className={styles.item}>
-        <span>{option}</span>
+        <span className={styles.option}>{option}</span>
         <button type="button" onClick={deleteI}>
           Delete
         </button>
 
-        <input
-          type="text"
-          value={editText}
-          onChange={this.handleChange}
-          name="editText"
-          placeholder="Edit..."
-        />
+        <label>
+          <span>Edit: </span>
+          <input
+            type="text"
+            value={editText}
+            onChange={this.handleChange}
+            name="editText"
+            placeholder="Edit..."
+          />
+        </label>
+
         <button type="button" onClick={this.editItem}>
           Edit
         </button>
@@ -46,16 +56,16 @@ class CategoryListItem extends Component {
 }
 
 const mapDispatchToProps = (dispatch, { type, option }) => {
-  if (type === "income") {
+  if (type === 'income') {
     return {
       deleteI: () => dispatch(removeIncomeCategoryAC(option)),
-      editI: optionNew => dispatch(editIncomeCategoryAC(option, optionNew))
+      editI: optionNew => dispatch(editIncomeCategoryAC(option, optionNew)),
     };
   }
-  if (type === "withdraw") {
+  if (type === 'withdraw') {
     return {
       deleteI: () => dispatch(removeWithdrawCategoryAC(option)),
-      editI: optionNew => dispatch(editWithdrawCategoryAC(option, optionNew))
+      editI: optionNew => dispatch(editWithdrawCategoryAC(option, optionNew)),
     };
   }
 };

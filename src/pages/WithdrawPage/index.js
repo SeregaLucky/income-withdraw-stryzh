@@ -1,1 +1,1 @@
-export { default } from "./WithdrawPage";
+export { default } from './WithdrawPage';

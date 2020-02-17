@@ -1,13 +1,13 @@
-import { persistStore } from "redux-persist";
-import { configureStore } from "@reduxjs/toolkit";
+import { persistStore } from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
 /* import - rootReducer */
-import rootReducer from "./rootReducer";
+import rootReducer from './rootReducer';
 
 const middlewares = [];
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: middlewares
+  middleware: middlewares,
 });
 
 export const persistor = persistStore(store);

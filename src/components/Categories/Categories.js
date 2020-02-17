@@ -1,15 +1,26 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import styles from "./Categories.module.css";
-import categoriesSelectors from "../../redux/categories/categoriesSelectors";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import T from 'prop-types';
+import shortid from 'shortid';
+import styles from './Categories.module.css';
+import categoriesSelectors from '../../redux/categories/categoriesSelectors';
 import {
   addIncomeCategoryAC,
-  addWithdrawCategoryAC
-} from "../../redux/categories/categoriesActions";
-import CategoryListItem from "../CategoryListItem/CategoryListItem";
+  addWithdrawCategoryAC,
+} from '../../redux/categories/categoriesActions';
+import CategoryListItem from '../CategoryListItem/CategoryListItem';
 
 class Categories extends Component {
-  state = { newCategory: "" };
+  static propTypes = {
+    options: T.arrayOf(T.string).isRequired,
+    addItem: T.func.isRequired,
+  };
+
+  state = { newCategory: '' };
+
+  inputIds = {
+    newCategoryInputId: shortid.generate(),
+  };
 
   handleChange = e => this.setState({ newCategory: e.target.value });
 
@@ -22,18 +33,24 @@ class Categories extends Component {
   render() {
     const { options, type } = this.props;
     const { newCategory } = this.state;
+    const { newCategoryInputId } = this.inputIds;
 
     return (
       <>
         <h3 className={styles.title}>Categories</h3>
 
-        <input
-          type="text"
-          name="newCategory"
-          value={newCategory}
-          onChange={this.handleChange}
-          placeholder="New categories..."
-        />
+        <label htmlFor={newCategoryInputId}>
+          <span>New category</span>
+          <input
+            type="text"
+            name="newCategory"
+            value={newCategory}
+            onChange={this.handleChange}
+            placeholder="New categories..."
+            id={newCategoryInputId}
+          />
+        </label>
+
         <button type="button" onClick={this.addNewItem}>
           Add
         </button>
@@ -51,27 +68,27 @@ class Categories extends Component {
 }
 
 const mapStateToProps = (state, { type }) => {
-  if (type === "income") {
+  if (type === 'income') {
     return {
-      options: categoriesSelectors.getIncomeCategory(state)
+      options: categoriesSelectors.getIncomeCategory(state),
     };
   }
-  if (type === "withdraw") {
+  if (type === 'withdraw') {
     return {
-      options: categoriesSelectors.getWithdrawCategory(state)
+      options: categoriesSelectors.getWithdrawCategory(state),
     };
   }
 };
 
 const mapDispatchToProps = (dispatch, { type }) => {
-  if (type === "income") {
+  if (type === 'income') {
     return {
-      addItem: option => dispatch(addIncomeCategoryAC(option))
+      addItem: option => dispatch(addIncomeCategoryAC(option)),
     };
   }
-  if (type === "withdraw") {
+  if (type === 'withdraw') {
     return {
-      addItem: option => dispatch(addWithdrawCategoryAC(option))
+      addItem: option => dispatch(addWithdrawCategoryAC(option)),
     };
   }
 };
