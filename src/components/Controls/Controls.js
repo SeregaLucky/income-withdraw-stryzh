@@ -17,7 +17,6 @@ const validationSchema = yup.object({
 const Controls = ({ type, add, options }) => {
   return (
     <div className={styles.controls}>
-      {console.log('Controls')}
       <Formik
         initialValues={{ num: '', money: [] }}
         onSubmit={(data, { resetForm }) => {

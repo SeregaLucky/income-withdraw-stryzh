@@ -47,7 +47,6 @@ class TbodyListItem extends Component {
 
   render() {
     const { item } = this.props;
-    console.log('Item');
 
     return (
       <tr>
