@@ -6,6 +6,7 @@ import routes from '../routes';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import Loader from './Loader/Loader';
+import Layout from './Layout/Layout';
 
 const BalancePage = lazy(() =>
   import('../pages/BalancePage' /*webpackChunkName: "BalancePage"*/),
@@ -21,15 +22,17 @@ const App = () => (
   <BrowserRouter>
     <Header />
 
-    <Suspense fallback={<Loader />}>
-      <Switch>
-        <Route exact path={routes.BALANCE_PAGE} component={BalancePage} />
-        <Route path={routes.INCOME_PAGE} component={IncomePage} />
-        <Route path={routes.WITHDRAW_PAGE} component={WithdrawPage} />
+    <Layout>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          <Route exact path={routes.BALANCE_PAGE} component={BalancePage} />
+          <Route path={routes.INCOME_PAGE} component={IncomePage} />
+          <Route path={routes.WITHDRAW_PAGE} component={WithdrawPage} />
 
-        <Redirect to={routes.BALANCE_PAGE} />
-      </Switch>
-    </Suspense>
+          <Redirect to={routes.BALANCE_PAGE} />
+        </Switch>
+      </Suspense>
+    </Layout>
 
     <Footer />
   </BrowserRouter>
