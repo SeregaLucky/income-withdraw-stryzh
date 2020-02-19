@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import T from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './WithdrawPage.module.css';
-import balanceSelectors from '../../redux/balance/balanceSelectors';
+import balanceS from '../../redux/balance/balanceSelectors';
 import { addWithdrawMoneyAC } from '../../redux/balance/balanceActions';
 import Controls from '../../components/Controls/Controls';
 import TransactionHistory from '../../components/TransactionHistory/TransactionHistory';
 import Categories from '../../components/Categories/Categories';
 
-const WithdrawPage = ({ list, addWithdraw }) => {
+const WithdrawPage = () => {
   const [isShowCategoties, setIsShow] = useState(false);
+
+  const list = useSelector(state => balanceS.getWithdraw(state));
+  const dispatch = useDispatch();
+
+  const addWithdraw = (typeNeed, amount, direction) => {
+    dispatch(addWithdrawMoneyAC(typeNeed, amount, direction));
+  };
 
   const toggle = () => setIsShow(state => !state);
 
@@ -32,18 +38,4 @@ const WithdrawPage = ({ list, addWithdraw }) => {
   );
 };
 
-WithdrawPage.propTypes = {
-  list: T.arrayOf(T.shape()).isRequired,
-  addWithdraw: T.func.isRequired,
-};
-
-const mapStateToProps = state => ({
-  list: balanceSelectors.getWithdraw(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  addWithdraw: (typeNeed, amount, direction) =>
-    dispatch(addWithdrawMoneyAC(typeNeed, amount, direction)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(WithdrawPage);
+export default WithdrawPage;
