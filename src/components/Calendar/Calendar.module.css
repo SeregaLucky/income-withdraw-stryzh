@@ -5,3 +5,13 @@
   padding: 6px 10px;
   text-transform: uppercase;
 }
+.buttonActive {
+  composes: button;
+  background-color: green;
+}
+/* .myTest {
+  background: linear-gradient(135deg, #f7ff00, #db36a4);
+}
+.activvve {
+  background: #fff;
+} */

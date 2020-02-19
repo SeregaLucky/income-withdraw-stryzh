@@ -126,6 +126,8 @@ const getFilterWithdraw = createSelector(
 );
 
 export default {
+  getDateFilter,
+
   getIncome,
   getAmountIncome,
   getByIdIncome,
