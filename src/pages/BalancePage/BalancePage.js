@@ -1,13 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import T from 'prop-types';
+import { useSelector } from 'react-redux';
 import styles from './BalancePage.module.css';
-import balanceSelectors from '../../redux/balance/balanceSelectors';
+import balanceS from '../../redux/balance/balanceSelectors';
 import ResultProgressBar from '../../components/ResultProgressBar/ResultProgressBar';
 import CategoryBar from '../../components/CategoryBar/CategoryBar';
 import CalendarMy from '../../components/Calendar/Calendar';
 
-const BalancePage = ({ income, withdraw, allIncome, allWithdraw }) => {
+const BalancePage = () => {
+  const income = useSelector(state => balanceS.getAmountIncome(state));
+  const allIncome = useSelector(state => balanceS.getFilterIncome(state));
+
+  const withdraw = useSelector(state => balanceS.getAmountWithdraw(state));
+  const allWithdraw = useSelector(state => balanceS.getFilterWithdraw(state));
+
   const balance = income - withdraw;
   const all = income + withdraw;
 
@@ -15,6 +20,8 @@ const BalancePage = ({ income, withdraw, allIncome, allWithdraw }) => {
     <section className={styles.alanceSection}>
       <div className={styles.container}>
         <h2 className={styles.title}>Balance page</h2>
+
+        <CalendarMy />
 
         {all && (
           <ul className={styles.list}>
@@ -25,8 +32,6 @@ const BalancePage = ({ income, withdraw, allIncome, allWithdraw }) => {
         )}
 
         {all > 0 && <ResultProgressBar income={income} all={all} />}
-
-        <CalendarMy />
 
         <ul className={styles.listBar}>
           <li className={styles.itemBar}>
@@ -41,19 +46,4 @@ const BalancePage = ({ income, withdraw, allIncome, allWithdraw }) => {
   );
 };
 
-BalancePage.propTypes = {
-  income: T.number.isRequired,
-  allIncome: T.shape({}).isRequired,
-  withdraw: T.number.isRequired,
-  allWithdraw: T.shape({}).isRequired,
-};
-
-const mapStateToProps = state => ({
-  income: balanceSelectors.getAmountIncome(state),
-  allIncome: balanceSelectors.getFilterIncome(state),
-
-  withdraw: balanceSelectors.getAmountWithdraw(state),
-  allWithdraw: balanceSelectors.getFilterWithdraw(state),
-});
-
-export default connect(mapStateToProps)(BalancePage);
+export default BalancePage;

@@ -10,10 +10,6 @@ const getDateFilter = state => state.balance.filterByDate;
  */
 const getIncome = state => state.balance.incomeMoney;
 
-const getAmountIncome = createSelector([getIncome], incomeMoney => {
-  return incomeMoney.reduce((acc, next) => acc + next.amount, 0);
-});
-
 const getByIdIncome = (state, id) => {
   return getIncome(state).find(item => item.id === id);
 };
@@ -34,6 +30,10 @@ const getIncomeFilterByDate = createSelector(
     return filterIncome;
   },
 );
+
+const getAmountIncome = createSelector([getIncomeFilterByDate], incomeMoney => {
+  return incomeMoney.reduce((acc, next) => acc + next.amount, 0);
+});
 
 const getFilterIncome = createSelector([getIncomeFilterByDate], incomeMoney => {
   const allDirections = incomeMoney.map(item => {
@@ -67,10 +67,6 @@ const getFilterIncome = createSelector([getIncomeFilterByDate], incomeMoney => {
  */
 const getWithdraw = state => state.balance.withdrawMoney;
 
-const getAmountWithdraw = createSelector([getWithdraw], withdrawMoney => {
-  return withdrawMoney.reduce((acc, next) => acc + next.amount, 0);
-});
-
 const getByIdWithdraw = (state, id) => {
   return getWithdraw(state).find(item => item.id === id);
 };
@@ -89,6 +85,13 @@ const getWithdrawFilterByDate = createSelector(
     });
 
     return filterWithdraw;
+  },
+);
+
+const getAmountWithdraw = createSelector(
+  [getWithdrawFilterByDate],
+  withdrawMoney => {
+    return withdrawMoney.reduce((acc, next) => acc + next.amount, 0);
   },
 );
 
